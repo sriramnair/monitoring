@@ -16,7 +16,7 @@ const app = express()
 
 app.get('/', (req, res)=> {
     res.sendFile(path.join(__dirname, '/public/index.html'))
-    rollBar.info('html file served successfully')
+    rollbar.info('html file served successfully')
 })
 
 let students = []
@@ -26,11 +26,11 @@ app.post('/api/student', (req, res)=> {
     name = name.trim()
 
     students.push(name)
-    rollBar.log('Student added successfully', {author: 'Scott', type: 'manual entry'})
+    rollbar.log('Student added successfully', {author: 'Scott', type: 'manual entry'})
     res.status(200).send(students)
 })
 
-app.use(rollBar.errorHandler())
+app.use(rollbar.errorHandler())
 
 const port = process.env.PORT || 4545
 
